@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,
+          maximum-scale=1.0, user-scalable=no">
+
+    <meta name="theme-color" content="#050813">
+    <meta name="description"
+          content="NIGHTSHIFT Lite - A futuristic 3D racing experience">
+
+    <title>NIGHTSHIFT//Lite</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <div id="game-container"></div>
+
+    <div id="loading">
+        <div class="loading-logo">NIGHTSHIFT<span>//LITE</span></div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p>INITIALIZING RACING SYSTEM</p>
+    </div>
+
+    <div id="hud">
+
+        <header class="top-bar">
+            <div class="brand">
+                NIGHTSHIFT<span>//LITE</span>
+                <small>NEON RACING DIVISION</small>
+            </div>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                SYSTEM ONLINE
+            </div>
+        </header>
+
+        <section class="race-info">
+            <div class="info-item">
+                <span class="info-label">LAP</span>
+                <span id="lap">01 / 03</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">TIME</span>
+                <span id="timer">00:00.00</span>
+            </div>
+        </section>
+
+        <section class="speed-panel">
+            <div class="speed-number">
+                <span id="speed">000</span>
+                <span class="speed-unit">KM/H</span>
+            </div>
+
+            <div class="speed-track">
+                <div id="speed-fill"></div>
+            </div>
+
+            <div class="gear-line">
+                <span>GEAR</span>
+                <span id="gear">N</span>
+                <span class="engine-label">ELECTRIC PERFORMANCE</span>
+            </div>
+        </section>
+
+        <div class="bottom-label">
+            NIGHT CITY CIRCUIT <span>•</span> SECTOR 01
+        </div>
+
+    </div>
+
+    <div id="controls">
+
+        <div class="steering-controls">
+            <button class="control-btn" data-control="left">
+                ◀
+            </button>
+
+            <button class="control-btn" data-control="right">
+                ▶
+            </button>
+        </div>
+
+        <div class="driving-controls">
+            <button class="control-btn brake-btn"
+                    data-control="brake">
+                BRAKE
+            </button>
+
+            <button class="control-btn gas-btn"
+                    data-control="gas">
+                ACCELERATE
+            </button>
+
+            <button class="control-btn drift-btn"
+                    data-control="drift">
+                DRIFT
+            </button>
+        </div>
+
+    </div>
+
+    <div id="message">
+        <span>WASD / ARROW KEYS</span>
+        <span>SPACE — DRIFT</span>
+    </div>
+
+    <script type="module" src="game.js"></script>
+
+</body>
+</html>
