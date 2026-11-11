@@ -1,0 +1,395 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+    --blue: #00c8ff;
+    --blue-glow: rgba(0, 200, 255, 0.5);
+    --white: #eaf7ff;
+    --muted: #71869a;
+    --background: #050813;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--background);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+#game-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+#game-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#hud {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.top-bar {
+    position: absolute;
+    top: 24px;
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.brand {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 0 0 18px var(--blue-glow);
+}
+
+.brand span,
+.loading-logo span {
+    color: var(--blue);
+}
+
+.brand small {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 4px;
+    margin-top: 6px;
+}
+
+.status {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #9eb5c7;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00f0a0;
+    box-shadow: 0 0 12px #00f0a0;
+    margin-right: 7px;
+}
+
+.race-info {
+    position: absolute;
+    top: 100px;
+    left: 28px;
+    display: flex;
+    gap: 35px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.info-label {
+    color: var(--muted);
+    font-size: 9px;
+    margin-bottom: 5px;
+}
+
+.speed-panel {
+    position: absolute;
+    right: 28px;
+    bottom: 40px;
+    width: 210px;
+    text-align: right;
+}
+
+.speed-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 62px;
+    font-weight: 700;
+    letter-spacing: -3px;
+    text-shadow: 0 0 25px var(--blue-glow);
+}
+
+.speed-unit {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--blue);
+}
+
+.speed-track {
+    width: 100%;
+    height: 4px;
+    margin-top: 7px;
+    background: #172334;
+    overflow: hidden;
+}
+
+#speed-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--blue);
+    box-shadow: 0 0 15px var(--blue);
+    transition: width 0.1s linear;
+}
+
+.gear-line {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+#gear {
+    font-size: 20px;
+    color: var(--blue);
+}
+
+.engine-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.bottom-label {
+    position: absolute;
+    left: 28px;
+    bottom: 28px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #9eb5c7;
+}
+
+.bottom-label span {
+    color: var(--blue);
+    margin: 0 6px;
+}
+
+#controls {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.steering-controls,
+.driving-controls {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 12px;
+    pointer-events: auto;
+}
+
+.steering-controls {
+    left: 24px;
+}
+
+.driving-controls {
+    right: 24px;
+    align-items: flex-end;
+}
+
+.control-btn {
+    width: 68px;
+    height: 64px;
+    border: 1px solid rgba(0, 200, 255, 0.4);
+    background: rgba(4, 16, 30, 0.65);
+    color: var(--white);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    touch-action: none;
+    cursor: pointer;
+}
+
+.control-btn:active {
+    background: rgba(0, 150, 220, 0.4);
+    border-color: var(--blue);
+    box-shadow: 0 0 20px var(--blue-glow);
+}
+
+.gas-btn {
+    width: 100px;
+    height: 85px;
+    border-color: var(--blue);
+    color: var(--blue);
+    font-size: 11px;
+}
+
+.brake-btn,
+.drift-btn {
+    width: 70px;
+    font-size: 10px;
+}
+
+.drift-btn {
+    border-color: rgba(255, 100, 70, 0.6);
+    color: #ff997e;
+}
+
+#message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 20px;
+    color: rgba(220, 240, 255, 0.65);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    pointer-events: none;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+#loading {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #050813;
+    transition: opacity 0.7s ease;
+}
+
+.loading-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.loading-bar {
+    width: 220px;
+    height: 3px;
+    margin-top: 25px;
+    background: #172334;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background: var(--blue);
+    box-shadow: 0 0 12px var(--blue);
+    animation: load 1.8s ease forwards;
+}
+
+#loading p {
+    margin-top: 15px;
+    color: var(--muted);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+@media (max-width: 600px) {
+    .top-bar {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+
+    .status {
+        font-size: 8px;
+    }
+
+    .race-info {
+        left: 16px;
+        top: 85px;
+        gap: 20px;
+    }
+
+    .speed-panel {
+        right: 16px;
+        bottom: 145px;
+        width: 145px;
+    }
+
+    .speed-number {
+        font-size: 42px;
+    }
+
+    .steering-controls {
+        left: 12px;
+        bottom: 16px;
+        gap: 7px;
+    }
+
+    .driving-controls {
+        right: 12px;
+        bottom: 16px;
+        gap: 7px;
+    }
+
+    .control-btn {
+        width: 52px;
+        height: 55px;
+        font-size: 14px;
+    }
+
+    .gas-btn {
+        width: 76px;
+        height: 75px;
+        font-size: 9px;
+    }
+
+    .brake-btn,
+    .drift-btn {
+        width: 54px;
+        font-size: 8px;
+    }
+
+    .bottom-label {
+        display: none;
+    }
+
+    #message {
+        top: 44%;
+        font-size: 7px;
+        gap: 8px;
+    }
+}
+
+@media (pointer: fine) {
+    #controls {
+        opacity: 0.75;
+    }
+}
